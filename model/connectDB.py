@@ -5,7 +5,7 @@ cursor = conn.cursor()
 
 def create_table():
     cursor.execute('''
-        Create table tersornpat(
+        Create table users(
             name varChar(100),
             email varChar(100)
         )
@@ -22,6 +22,10 @@ def insert_data(username, email):
 def get_all_data():
     cursor.execute('SELECT * FROM users')
     return cursor.fetchall()
+
+def remove_all_data():
+    cursor.execute('DELETE FROM users')
+    conn.commit
 
 def close_connection():
     conn.close()

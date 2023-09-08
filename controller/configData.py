@@ -1,25 +1,17 @@
-from flask import Blueprint,jsonify, render_template
+from flask import Blueprint, render_template,request,redirect,url_for
 import model.connectDB as db
 
 dataBlueprint = Blueprint('configData',  __name__, url_prefix='/configdata')
 
-@dataBlueprint.route('/')
+@dataBlueprint.route('/', methods=['GET', 'POST'])
 def getData():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        db.insert_data(username, email)
+
     data_list =  db.get_all_data()
-    
-    result_dict = []
-
-    for entry in data_list:
-        result_dict.append({
-            "id": entry[0],
-            "username": entry[1],
-            "email": entry[2]
-        })
-
-    # return jsonify(data_list)
-    return jsonify(result_dict)
-    # return render_template('showTable.html', data_list=data_list)
-
+    return render_template('showTable.html', data_list=data_list)
 
 @dataBlueprint.route('/adddata')
 def addData():
@@ -29,3 +21,8 @@ def addData():
         return "Add Data Succeed"
     except:
         return "Add Data Failed"
+    
+@dataBlueprint.route('/deletedata')
+def deletedata():
+    db.remove_all_data()
+    return redirect(url_for('configData.getData'))
