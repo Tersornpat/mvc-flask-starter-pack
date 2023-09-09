@@ -1,20 +1,100 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <title>This is index</title>
 </head>
 <body>
-    <h1>Welcome to the home page</h1>
-    <a href="/configdata/adddata">
-        <input type="button" value="add data"></input>
-    </a>
-    <br><br>
-    <a href="/configdata/">
-        <input type="button" value="show data"></input>
-    </a>
+    <h1>Inset Your Data</h1>
+    <table border="1">
+        <tr>
+            <td>
+                <form action="/check" method="get">
+                    <h2>GET</h2>
+                    <h3>URL:</h3>
+                    <input type="text" name="url">
+            
+                    <input type="submit" value="submit">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form action="/check" method="post">
+                    <h2>POST</h2>
+                    <h3>URL:</h3>
+                    <input type="text" name="url">
+            
+                    <h3>DATA:</h3>
+                    <input type="text" name="data">
+                    <input type="submit" value="submit">
+                </form>
+            </td>
+        </tr>
+    </table>
     
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Monic Framework</title>
+        <link rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="mb-4">Monic and Oiber Frameworks</h1>
+
+            <form action="/check" method="get">
+                <div class="form-group">
+                    <label for="URL">URL</label>
+                    <input type="text" class="form-control" id="URL" name="url"
+                        placeholder="Enter URL" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit GET Request</button>
+            </form>
+            <br><br>
+            <form action="/check" method="POST">
+                <div class="form-group">
+                    <label for="URL">URL</label>
+                    <input type="text" class="form-control" id="URL" name="url"
+                        placeholder="Enter URL" required>
+                </div>
+                <div class="form-group">
+                    <label for="Data">Data</label>
+                    <textarea class="form-control" id="Data" name="data"
+                        rows="3" placeholder="Enter Data" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit POST
+                    Request</button>
+            </form>
+
+            <h2 class="mt-5">Messages</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>TEXTDATA</th>
+                        <th>MONIC</th>
+                        <th>OIBER</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for message in messages %}
+                    <tr>
+                        <td>{{ message[0] }}</td>
+                        <td>{{ message[1] }}</td>
+                        <td>{{ message[2] }}</td>
+                        <td>{{ message[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>
